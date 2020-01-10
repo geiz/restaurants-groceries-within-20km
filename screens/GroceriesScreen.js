@@ -53,6 +53,7 @@ export default class GroceriesScreen extends React.Component {
       }
       const json = await response.json();
       this.setState({ results: json });
+      console.log(json)
     } catch (error) {
       this.setState({ errorMessage: error });
       alert(error);

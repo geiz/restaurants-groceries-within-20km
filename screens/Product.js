@@ -8,10 +8,9 @@ import {
 } from 'react-native';
 import {Linking} from 'expo';
 
-import { Block, Text, Button, theme } from 'galio-framework';
+import { Block, Text, theme } from 'galio-framework';
 import { Icon } from '../components';
 import materialTheme from '../constants/Theme';
-import Images from "../constants/Images";
 import { iPhoneX, HeaderHeight } from "../constants/utils";
 const { height, width } = Dimensions.get('window');
 
@@ -57,7 +56,7 @@ export default class Product extends React.Component {
                       </TouchableHighlight>
                     </Block>
                   </Block>
-                  <Text size={18} bold>{product.isClosed ? "Closed" : "Open"}</Text>
+                  <Text size={18} bold>{product.closed ? "Closed" : "Open"}</Text>
                 </Block>
               </Block>
           </Block>
