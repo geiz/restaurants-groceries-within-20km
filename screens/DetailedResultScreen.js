@@ -12,12 +12,9 @@ import { Block, Text, theme } from 'galio-framework';
 import { Icon } from '../components';
 import materialTheme from '../constants/Theme';
 import { iPhoneX, HeaderHeight } from "../constants/utils";
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
-export default class Product extends React.Component {
-  state = {
-    selectedSize: null,
-  };
+export default class DetailedResultScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
@@ -37,17 +34,19 @@ export default class Product extends React.Component {
           </Block>
           <Block flex style={styles.options}>
               <Block style={{ paddingHorizontal: theme.SIZES.BASE, paddingTop: theme.SIZES.BASE * 2 }}>
+
+                {/* Result Title */ }
                 <Text size={28} style={{ paddingBottom: 24 }}>{product.title}</Text>
                 <Block row space="between">
                   <Block row>
                     <Block>
 
-                      {/* Product Info details */ }
+                      {/* Result Details */ }
                       <Text size={16} color={materialTheme.COLORS.WARNING}><Icon name="shape-star" family="GalioExtra" size={14}/> {product.rating}  </Text>
                       <Text size={16}><Icon name="comment" color={materialTheme.COLORS.LABEL} family="Material" size={14} /> {product.reviewCount} </Text>
                       <Text size={16}><Icon name="phone" color={materialTheme.COLORS.LABEL} family="Material" size={14} /> {product.phone} </Text>
                       
-                      {/* Opens external link as button */ }
+                      {/* Opens external link to listing on Yelp as a button */ }
                       <TouchableHighlight
                         style={styles.sizeButton}
                         underlayColor={materialTheme.COLORS.PRICE_COLOR}
@@ -56,6 +55,8 @@ export default class Product extends React.Component {
                       </TouchableHighlight>
                     </Block>
                   </Block>
+                  
+                  {/* Result is Open or Closed */ }
                   <Text size={18} bold>{product.closed ? "Closed" : "Open"}</Text>
                 </Block>
               </Block>
@@ -82,74 +83,10 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.2
   },
-  galleryImage: {
-    width: width,
-    height: 'auto'
-  },
-  dots: {
-    height: theme.SIZES.BASE / 2,
-    margin: theme.SIZES.BASE / 2,
-    borderRadius: 4,
-    backgroundColor: 'white'
-  },
-  dotsContainer: {
-    position: 'absolute',
-    bottom: theme.SIZES.BASE,
-    left: 0,
-    right: 0,
-    bottom: height / 10,
-  },
-  addToCart: {
-    width: width - theme.SIZES.BASE * 4,
-    marginTop: theme.SIZES.BASE * 2,
-    shadowColor: "rgba(0, 0, 0, 0.2)",
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 8,
-    shadowOpacity: 1
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    marginBottom: theme.SIZES.BASE,
-    marginRight: 8,
-  },
-  size: {
-    height: theme.SIZES.BASE * 3,
-    width: (width - theme.SIZES.BASE * 2) / 3,
-    borderBottomWidth: 0.5,
-    borderBottomColor: materialTheme.COLORS.BORDER_COLOR,
-    overflow: 'hidden',
-  },
   sizeButton: {
     height: theme.SIZES.BASE * 3,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  active: {
-    backgroundColor: materialTheme.COLORS.PRICE_COLOR,
-  },
-  roundTopLeft: {
-    borderTopLeftRadius: 4,
-    borderRightColor: materialTheme.COLORS.BORDER_COLOR,
-    borderRightWidth: 0.5,
-  },
-  roundBottomLeft: {
-    borderBottomLeftRadius: 4,
-    borderRightColor: materialTheme.COLORS.BORDER_COLOR,
-    borderRightWidth: 0.5,
-    borderBottomWidth: 0,
-  },
-  roundTopRight: {
-    borderTopRightRadius: 4,
-    borderLeftColor: materialTheme.COLORS.BORDER_COLOR,
-    borderLeftWidth: 0.5,
-  },
-  roundBottomRight: {
-    borderBottomRightRadius: 4,
-    borderLeftColor: materialTheme.COLORS.BORDER_COLOR,
-    borderLeftWidth: 0.5,
-    borderBottomWidth: 0,
   },
 });

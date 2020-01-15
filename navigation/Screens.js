@@ -4,10 +4,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import RestaurantsScreen from '../screens/RestaurantsScreen';
-import GroceriesScreen from '../screens/GroceriesScreen';
-import ProductScreen from '../screens/Product';
-import { Header, Drawer } from '../components/';
+import SearchResultsScreen from '../screens/SearchResultsScreen';
+import DetailedResultScreen from '../screens/DetailedResultScreen';
+import { Header } from '../components/';
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -20,10 +19,6 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
     const thisSceneIndex = scene.index
     const width = layout.initWidth
     
-    const scale = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [4, 1, 1]
-    })
     const opacity = position.interpolate({
       inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
       outputRange: [0, 1, 1],
@@ -47,13 +42,13 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
 
 const RestaurantStack = createStackNavigator({
   Restaurants: {
-    screen: RestaurantsScreen,
+    screen: () => <SearchResultsScreen term='restaurants'/>,
     navigationOptions: ({navigation}) => ({
       header: <Header iconName='none' title="Nearby Restaurants" navigation={navigation} />,
     })
   },
   Product: {
-    screen: ProductScreen,
+    screen: DetailedResultScreen,
     navigationOptions: ({navigation}) => ({
       header: <Header back title={navigation.state.params.product.title} navigation={navigation} />,
     })
@@ -68,13 +63,13 @@ const RestaurantStack = createStackNavigator({
 
 const GroceryStack = createStackNavigator({
   Groceries: {
-    screen: GroceriesScreen,
+    screen: () => <SearchResultsScreen term='groceries'/>,
     navigationOptions: ({navigation}) => ({
       header: <Header iconName='none' title="Nearby Groceries" navigation={navigation} />,
     })
   },
   Product: {
-    screen: ProductScreen,
+    screen: DetailedResultScreen,
     navigationOptions: ({navigation}) => ({
       header: <Header back title={navigation.state.params.product.title} navigation={navigation} />,
     })
